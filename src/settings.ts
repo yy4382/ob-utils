@@ -1,4 +1,4 @@
-import {App, Notice, PluginSettingTab, Setting} from "obsidian";
+import { App, Notice, PluginSettingTab, Setting } from "obsidian";
 import ObUtilsPlugin from "./main";
 
 export interface ObUtilsSettings {
@@ -6,8 +6,8 @@ export interface ObUtilsSettings {
 }
 
 export const DEFAULT_SETTINGS: ObUtilsSettings = {
-	recentDirectories: []
-}
+	recentDirectories: [],
+};
 
 export class ObUtilsSettingTab extends PluginSettingTab {
 	plugin: ObUtilsPlugin;
@@ -18,19 +18,19 @@ export class ObUtilsSettingTab extends PluginSettingTab {
 	}
 
 	display(): void {
-		const {containerEl} = this;
+		const { containerEl } = this;
 
 		containerEl.empty();
 
 		new Setting(containerEl)
-			.setName('Clear recent directories')
-			.setDesc('Clear the list of recently used directories')
-			.addButton(button => button
-				.setButtonText('Clear')
-				.onClick(() => {
+			.setName("Clear recent directories")
+			.setDesc("Clear the list of recently used directories")
+			.addButton((button) =>
+				button.setButtonText("Clear").onClick(() => {
 					this.plugin.settings.recentDirectories = [];
 					void this.plugin.saveSettings();
-					new Notice('Recent directories cleared');
-				}));
+					new Notice("Recent directories cleared");
+				}),
+			);
 	}
 }

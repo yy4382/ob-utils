@@ -1,7 +1,11 @@
-import {Plugin} from 'obsidian';
-import {DEFAULT_SETTINGS, ObUtilsSettings, ObUtilsSettingTab} from "./settings";
-import {DirectoryPickerModal} from './DirectoryPickerModal';
-import {moveNoteToDirectory} from './MoveNoteCommand';
+import { Plugin } from "obsidian";
+import {
+	DEFAULT_SETTINGS,
+	ObUtilsSettings,
+	ObUtilsSettingTab,
+} from "./settings";
+import { DirectoryPickerModal } from "./DirectoryPickerModal";
+import { moveNoteToDirectory } from "./MoveNoteCommand";
 
 export default class ObUtilsPlugin extends Plugin {
 	settings: ObUtilsSettings;
@@ -11,8 +15,8 @@ export default class ObUtilsPlugin extends Plugin {
 
 		// Add command to move note to directory
 		this.addCommand({
-			id: 'move-note-to-directory',
-			name: 'Move note to directory',
+			id: "move-note-to-directory",
+			name: "Move note to directory",
 			checkCallback: (checking: boolean) => {
 				const activeFile = this.app.workspace.getActiveFile();
 
@@ -22,26 +26,32 @@ export default class ObUtilsPlugin extends Plugin {
 							this.app,
 							this,
 							(targetDir: string) => {
-								void moveNoteToDirectory(this.app, this, targetDir);
-							}
+								void moveNoteToDirectory(
+									this.app,
+									this,
+									targetDir,
+								);
+							},
 						).open();
 					}
 					return true;
 				}
 				return false;
-			}
+			},
 		});
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
 		this.addSettingTab(new ObUtilsSettingTab(this.app, this));
-
 	}
 
-	onunload() {
-	}
+	onunload() {}
 
 	async loadSettings() {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData() as Partial<ObUtilsSettings>);
+		this.settings = Object.assign(
+			{},
+			DEFAULT_SETTINGS,
+			(await this.loadData()) as Partial<ObUtilsSettings>,
+		);
 	}
 
 	async saveSettings() {

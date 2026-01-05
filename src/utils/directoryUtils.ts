@@ -1,4 +1,4 @@
-import {App, TFolder, Vault} from 'obsidian';
+import { App, TFolder, Vault } from "obsidian";
 
 /**
  * Get all directories in the vault
@@ -10,7 +10,7 @@ export function getAllDirectories(app: App): string[] {
 	for (const file of files) {
 		if (file instanceof TFolder) {
 			// Skip root directory (/) as we represent it with empty string
-			if (file.path !== '/' && file.path !== '') {
+			if (file.path !== "/" && file.path !== "") {
 				folders.push(file.path);
 			}
 		}
@@ -24,9 +24,12 @@ export function getAllDirectories(app: App): string[] {
  * Add a directory to the recent list
  * Maintains a maximum of 10 recent directories
  */
-export function addRecentDirectory(recent: string[], dirPath: string): string[] {
+export function addRecentDirectory(
+	recent: string[],
+	dirPath: string,
+): string[] {
 	// Remove the directory if it already exists (to move it to front)
-	const filtered = recent.filter(path => path !== dirPath);
+	const filtered = recent.filter((path) => path !== dirPath);
 
 	// Add to front
 	const updated = [dirPath, ...filtered];
@@ -38,7 +41,11 @@ export function addRecentDirectory(recent: string[], dirPath: string): string[] 
 /**
  * Check if a file exists at the specified path
  */
-export function checkFileExists(vault: Vault, dirPath: string, fileName: string): boolean {
+export function checkFileExists(
+	vault: Vault,
+	dirPath: string,
+	fileName: string,
+): boolean {
 	const targetPath = dirPath ? `${dirPath}/${fileName}` : fileName;
 	const file = vault.getAbstractFileByPath(targetPath);
 	return file !== null;
@@ -50,8 +57,8 @@ export function checkFileExists(vault: Vault, dirPath: string, fileName: string)
 export function cleanupRecentDirectories(app: App, recent: string[]): string[] {
 	const allDirs = getAllDirectories(app);
 	// Add empty string for root directory
-	allDirs.unshift('');
+	allDirs.unshift("");
 
 	// Filter out directories that no longer exist
-	return recent.filter(dir => allDirs.includes(dir));
+	return recent.filter((dir) => allDirs.includes(dir));
 }
