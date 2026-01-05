@@ -27,6 +27,32 @@ Quickly move the current note to any directory in your vault with a searchable p
 - `Enter` - Select directory and move note
 - `Esc` - Cancel
 
+### Convert Note to Zettelkasten Format
+
+Convert notes to Zettelkasten format by adding a timestamp prefix to the filename.
+
+**Features:**
+- 📅 Automatic timestamp prefix in `yyMMdd-HHmm` format (e.g., `250105-0910 note title`)
+- 🎯 Smart date detection: uses frontmatter `date` property or file creation time
+- 🔒 Prevents duplicate conversion (skips notes already in zettelkasten format)
+- 🛡️ File conflict detection (prevents overwriting existing files)
+- 📁 Preserves directory structure
+- 🌍 Cross-platform compatible using Obsidian's native API
+
+**Usage:**
+1. Open any note in Obsidian
+2. Open command palette (`Cmd+P` / `Ctrl+P`)
+3. Search for "Convert note to zettelkasten format"
+4. Press `Enter` to convert
+
+**Date Priority:**
+1. Frontmatter `date` property (if present and valid)
+2. File creation time (fallback)
+
+**Example:**
+- **Before:** `my note.md` (with frontmatter `date: 2025-01-05T09:10:00`)
+- **After:** `250105-0910 my note.md`
+
 ## Settings
 
 Access plugin settings via Settings → Community Plugins → yy4382's Utilities.
