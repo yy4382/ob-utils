@@ -1,11 +1,10 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
+	"id": "obsidian-yy4382-utils",
+	"name": "yy4382's Utilities",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"description": "A collection of personal utility commands for Obsidian, including note file management and organization tools.",
+	"author": "yy4382",
+	"authorUrl": "",
 	"isDesktopOnly": false
 }

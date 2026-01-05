@@ -1,18 +1,18 @@
-import {App, PluginSettingTab, Setting} from "obsidian";
-import MyPlugin from "./main";
+import {App, Notice, PluginSettingTab, Setting} from "obsidian";
+import ObUtilsPlugin from "./main";
 
-export interface MyPluginSettings {
-	mySetting: string;
+export interface ObUtilsSettings {
+	recentDirectories: string[];
 }
 
-export const DEFAULT_SETTINGS: MyPluginSettings = {
-	mySetting: 'default'
+export const DEFAULT_SETTINGS: ObUtilsSettings = {
+	recentDirectories: []
 }
 
-export class SampleSettingTab extends PluginSettingTab {
-	plugin: MyPlugin;
+export class ObUtilsSettingTab extends PluginSettingTab {
+	plugin: ObUtilsPlugin;
 
-	constructor(app: App, plugin: MyPlugin) {
+	constructor(app: App, plugin: ObUtilsPlugin) {
 		super(app, plugin);
 		this.plugin = plugin;
 	}
@@ -23,14 +23,14 @@ export class SampleSettingTab extends PluginSettingTab {
 		containerEl.empty();
 
 		new Setting(containerEl)
-			.setName('Settings #1')
-			.setDesc('It\'s a secret')
-			.addText(text => text
-				.setPlaceholder('Enter your secret')
-				.setValue(this.plugin.settings.mySetting)
-				.onChange(async (value) => {
-					this.plugin.settings.mySetting = value;
-					await this.plugin.saveSettings();
+			.setName('Clear recent directories')
+			.setDesc('Clear the list of recently used directories')
+			.addButton(button => button
+				.setButtonText('Clear')
+				.onClick(() => {
+					this.plugin.settings.recentDirectories = [];
+					void this.plugin.saveSettings();
+					new Notice('Recent directories cleared');
 				}));
 	}
 }
