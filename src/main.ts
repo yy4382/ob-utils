@@ -6,6 +6,7 @@ import {
 } from "./settings";
 import { DirectoryPickerModal } from "./DirectoryPickerModal";
 import { moveNoteToDirectory } from "./MoveNoteCommand";
+import { convertToZettelkasten } from "./ConvertToZettelkastenCommand";
 
 export default class ObUtilsPlugin extends Plugin {
 	settings: ObUtilsSettings;
@@ -33,6 +34,23 @@ export default class ObUtilsPlugin extends Plugin {
 								);
 							},
 						).open();
+					}
+					return true;
+				}
+				return false;
+			},
+		});
+
+		// Add command to convert note to Zettelkasten format
+		this.addCommand({
+			id: "convert-to-zettelkasten",
+			name: "Convert note to zettelkasten format",
+			checkCallback: (checking: boolean) => {
+				const activeFile = this.app.workspace.getActiveFile();
+
+				if (activeFile) {
+					if (!checking) {
+						void convertToZettelkasten(this.app, this);
 					}
 					return true;
 				}
