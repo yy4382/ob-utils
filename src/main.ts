@@ -7,6 +7,9 @@ import {
 import { DirectoryPickerModal } from "./DirectoryPickerModal";
 import { moveNoteToDirectory } from "./MoveNoteCommand";
 import { convertToZettelkasten } from "./ConvertToZettelkastenCommand";
+import { registerMigrationCommands } from "./bulletJournal/migrationCommands";
+import { createJournalNavigatorExtension } from "./bulletJournal/navigatorExtension";
+import { createTaskActionExtension } from "./bulletJournal/taskActionExtension";
 
 export default class ObUtilsPlugin extends Plugin {
 	settings: ObUtilsSettings;
@@ -60,6 +63,11 @@ export default class ObUtilsPlugin extends Plugin {
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
 		this.addSettingTab(new ObUtilsSettingTab(this.app, this));
+		registerMigrationCommands(this);
+		this.registerEditorExtension([
+			createTaskActionExtension(this),
+			createJournalNavigatorExtension(this),
+		]);
 	}
 
 	onunload() {}

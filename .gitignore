@@ -17,6 +17,9 @@ main.js
 
 # obsidian
 data.json
+tests/ob-utils-test/.obsidian/plugins/
+tests/ob-utils-test/.obsidian/themes/
+tests/ob-utils-test/.obsidian/workspace*.json
 
 # Exclude macOS Finder (System Explorer) View States
 .DS_Store

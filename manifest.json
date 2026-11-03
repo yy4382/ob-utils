@@ -1,8 +1,8 @@
 {
 	"id": "obsidian-yy4382-utils",
 	"name": "yy4382's Utilities",
-	"version": "0.1.0",
-	"minAppVersion": "0.15.0",
+	"version": "0.2.0",
+	"minAppVersion": "1.13.0",
 	"description": "A collection of personal utility commands for Obsidian, including note file management and organization tools.",
 	"author": "yy4382",
 	"authorUrl": "",

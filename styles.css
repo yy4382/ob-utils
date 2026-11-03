@@ -1,15 +1,209 @@
-/*
+.bujo-navigator {
+	--bujo-day-size: 2rem;
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+	color: var(--text-muted);
+	inline-size: min(100%, 21rem);
+	margin-inline: auto;
+	padding-block: var(--bujo-navigator-gap, 4lh) 1.5rem;
+	user-select: none;
+}
 
-If your plugin does not need CSS, delete this file.
+.bujo-navigator button {
+	align-items: center;
+	background: transparent;
+	border: 0;
+	border-radius: var(--radius-s);
+	box-shadow: none;
+	color: inherit;
+	display: inline-flex;
+	font: inherit;
+	justify-content: center;
+	padding: 0.35rem;
+}
 
-*/
+.bujo-navigator button:disabled {
+	opacity: 0.32;
+}
 
-/* Directory picker modal styles */
-.recent-badge {
-	margin-left: auto;
-	font-size: 0.8em;
-	opacity: 0.7;
+.bujo-navigator button:not(:disabled):hover {
+	background: var(--background-modifier-hover);
+}
+
+.bujo-navigator button:not(:disabled):active {
+	background: var(--background-modifier-active-hover);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.bujo-navigator button:not(:disabled) {
+		transition: background-color 150ms ease, transform 150ms ease;
+	}
+
+	.bujo-navigator button:not(:disabled):hover {
+		transform: scale(1.08);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bujo-navigator button {
+		transition: none;
+	}
+}
+
+.bujo-navigator__header {
+	align-items: center;
+	display: grid;
+	grid-template-columns: var(--bujo-day-size) 1fr var(--bujo-day-size);
+}
+
+.bujo-navigator__heading {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	gap: 0.1rem;
+	min-width: 0;
+	text-align: center;
+}
+
+.bujo-navigator__heading strong {
+	color: var(--text-normal);
+}
+
+.bujo-navigator .bujo-navigator__today {
+	color: var(--text-faint);
+	font-size: var(--font-smallest);
+	line-height: 1;
+	padding-block: 0.2rem;
+}
+
+.bujo-navigator__grid {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	grid-template-rows: 1.5rem repeat(6, var(--bujo-day-size));
+	margin: 0.8rem 0 0.65rem;
+	place-items: center;
+	text-align: center;
+}
+
+.bujo-navigator__weekday {
+	font-size: var(--font-smallest);
+	line-height: 1;
+}
+
+.bujo-navigator .bujo-navigator__day {
+	block-size: var(--bujo-day-size);
+	inline-size: var(--bujo-day-size);
+	padding: 0;
+}
+
+.bujo-navigator__day.is-outside-month {
+	opacity: 0.45;
+}
+
+.bujo-navigator__day.is-today {
+	background: var(--interactive-accent);
+	border-radius: 50%;
+	color: var(--text-on-accent);
+	font-weight: var(--font-semibold);
+}
+
+.bujo-navigator .bujo-navigator__day.is-today:disabled {
+	opacity: 1;
+}
+
+.bujo-navigator__day.is-current-note {
+	border-radius: 50%;
+	box-shadow: 0 0 0 2px var(--text-accent);
+}
+
+.bujo-navigator__day.is-today.is-current-note {
+	box-shadow: 0 0 0 2px var(--background-primary), 0 0 0 4px var(--text-accent);
+}
+
+.bujo-navigator button.bujo-navigator__day.is-today:not(:disabled):hover {
+	background: var(--interactive-accent-hover);
+}
+
+.bujo-navigator .is-current-note-link {
+	color: var(--text-accent);
+	font-weight: var(--font-semibold);
+	text-decoration: underline;
+	text-underline-offset: 0.2em;
+}
+
+.bujo-navigator__links {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem;
+	justify-content: center;
+}
+
+.is-mobile .bujo-navigator {
+	--bujo-day-size: 2.5rem;
+
+	inline-size: min(100%, 23rem);
+}
+
+@media (pointer: coarse) {
+	.bujo-navigator {
+		--bujo-day-size: 2.5rem;
+
+		inline-size: min(100%, 23rem);
+	}
+}
+
+.bujo-migrate-action {
+	align-items: center;
+	display: inline-flex;
+	height: 1.5rem;
+	justify-content: center;
+	line-height: 1;
+	margin-inline-start: 0.35rem;
+	opacity: 0;
+	padding: 0.15rem;
+	vertical-align: middle;
+	width: 1.5rem;
+}
+
+.bujo-migrate-action > svg {
+	display: block;
+	margin: 0;
+}
+
+.cm-line:hover .bujo-migrate-action,
+.cm-activeLine .bujo-migrate-action,
+.bujo-migrate-action:focus,
+.bujo-migrate-action[aria-expanded="true"] {
+	opacity: 0.65;
+}
+
+.bujo-migrate-action:hover,
+.bujo-migrate-action:focus {
+	opacity: 1;
+}
+
+
+.is-mobile .bujo-migrate-action {
+	height: 2.25rem;
+	opacity: 0.5;
+	padding: 0.5rem;
+	width: 2.25rem;
+}
+
+@media (pointer: coarse) {
+	.bujo-migrate-action {
+		height: 2.25rem;
+		opacity: 0.5;
+		padding: 0.5rem;
+		width: 2.25rem;
+	}
+}
+
+.bujo-setting-error {
+	color: var(--text-error);
+	display: none;
+}
+
+.bujo-setting-error.is-visible {
+	display: block;
 }
