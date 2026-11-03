@@ -62,9 +62,18 @@ Access plugin settings via Settings → Community Plugins → yy4382's Utilities
 
 ## Installation
 
-### Manual Installation
+### Install with BRAT
 
-1. Download the latest release files (`main.js`, `manifest.json`, `styles.css`)
+1. In Obsidian, open **Settings → Community plugins → Browse**, search for **BRAT**, then install and enable it.
+2. Open **Settings → BRAT** and select **Add Beta plugin**.
+3. Enter `https://github.com/yy4382/ob-utils`, select the latest version, and select **Add Plugin**.
+4. Enable **yy4382's Utilities** in **Settings → Community plugins** if it is not already enabled.
+
+BRAT can check for updates and install new releases for you. See the [BRAT documentation](https://tfthacker.com/BRAT) for update settings. Installation requires at least one published [release](https://github.com/yy4382/ob-utils/releases) with plugin assets.
+
+### Manual installation
+
+1. Download `main.js`, `manifest.json`, and `styles.css` (if present) from the [latest release](https://github.com/yy4382/ob-utils/releases/latest).
 2. Create a folder: `YourVault/.obsidian/plugins/obsidian-yy4382-utils/`
 3. Copy the downloaded files into this folder
 4. Reload Obsidian
@@ -97,6 +106,19 @@ Access plugin settings via Settings → Community Plugins → yy4382's Utilities
 - `pnpm run dev` - Start compilation in watch mode
 - `pnpm run build` - Build for production
 - `pnpm run lint` - Run ESLint
+
+### Publishing a release
+
+1. Set the same `x.y.z` version in `package.json` and `manifest.json`.
+2. Add that version to `versions.json`, mapped to the `minAppVersion` in `manifest.json`.
+3. Commit and push these changes along with the release workflow.
+4. Tag that commit with the exact version, without a `v` prefix, and push the tag. For example, for version `0.1.0`:
+   ```bash
+   git tag 0.1.0
+   git push origin 0.1.0
+   ```
+
+The **Release plugin** GitHub Actions workflow validates the version, installs the locked dependencies, runs lint and the production build, and publishes a release with generated notes. It attaches `main.js`, `manifest.json`, and `styles.css` (if present) as individual assets for BRAT and manual installation. Build artifacts do not need to be committed.
 
 ## License
 
