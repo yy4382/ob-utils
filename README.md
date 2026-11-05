@@ -1,64 +1,37 @@
 # yy4382's Utilities for Obsidian
 
-A collection of personal utility commands for Obsidian, including note file management and organization tools.
+A collection of personal utility commands for Obsidian: note file management, Zettelkasten naming, and Bullet Journal task migration. Requires Obsidian 1.13 or later.
 
 ## Features
 
-### Move Note to Directory
+### Move note to directory
 
-Quickly move the current note to any directory in your vault with a searchable picker interface.
+Move the current note to any directory in your vault with a searchable picker that lists your 10 most recently used directories first.
 
-**Features:**
-- 🔍 Searchable directory picker (similar to command palette)
-- ⏱️ Remembers your 10 most recently used directories
-- 🎯 Recent directories shown at the top for quick access
-- ✨ Automatic cleanup of deleted directories from recent list
-- 🛡️ File conflict detection (prevents overwriting existing files)
+### Convert note to Zettelkasten format
 
-**Usage:**
-1. Open any note in Obsidian
-2. Open command palette (`Cmd+P` / `Ctrl+P`)
-3. Search for "Move note to directory"
-4. Type to filter directories or use arrow keys to navigate
-5. Press `Enter` to move the note
+Prefix the current note's filename with a `yyMMdd-HHmm` timestamp (e.g. `my note.md` → `250105-0910 my note.md`), taken from the frontmatter `date` property or, failing that, the file creation time.
 
-**Keyboard Navigation:**
-- `↑` / `↓` - Navigate through directories
-- `Enter` - Select directory and move note
-- `Esc` - Cancel
+### Bullet Journal
 
-### Convert Note to Zettelkasten Format
+Task migration and navigation for daily, monthly, semester, and future log notes. Notes are recognized by the path formats in the settings; the plugin never creates journal notes, so destinations must already exist.
 
-Convert notes to Zettelkasten format by adding a timestamp prefix to the filename.
+**Task migration** moves or plans an incomplete task (`- [ ]`) together with its nested content into another journal note, leaving a `↩` link back to the source. Use the action icon beside a task, or the editor commands.
 
-**Features:**
-- 📅 Automatic timestamp prefix in `yyMMdd-HHmm` format (e.g., `250105-0910 note title`)
-- 🎯 Smart date detection: uses frontmatter `date` property or file creation time
-- 🔒 Prevents duplicate conversion (skips notes already in zettelkasten format)
-- 🛡️ File conflict detection (prevents overwriting existing files)
-- 📁 Preserves directory structure
-- 🌍 Cross-platform compatible using Obsidian's native API
+- Daily and future log tasks can move to today, this month, this semester, or the future log; monthly tasks can be planned for a day; semester tasks can be planned into a day or month. Pickers choose any existing note.
+- The source is marked as migrated (`>`) or scheduled (`<`); planned tasks stay open in their monthly or semester note.
+- **Undo last task operation** reverses the most recent operation, even after a restart (last 100 are kept).
 
-**Usage:**
-1. Open any note in Obsidian
-2. Open command palette (`Cmd+P` / `Ctrl+P`)
-3. Search for "Convert note to zettelkasten format"
-4. Press `Enter` to convert
+**Journal navigator** adds a compact month calendar below journal notes, with links to the month's daily, monthly, and semester notes and the year's future log.
 
-**Date Priority:**
-1. Frontmatter `date` property (if present and valid)
-2. File creation time (fallback)
-
-**Example:**
-- **Before:** `my note.md` (with frontmatter `date: 2025-01-05T09:10:00`)
-- **After:** `250105-0910 my note.md`
+Both features work in Live Preview and Source mode, but not Reading view. See [the design doc](docs/design/bullet-journal.md) for full behavior.
 
 ## Settings
 
-Access plugin settings via Settings → Community Plugins → yy4382's Utilities.
+Access settings via **Settings → Community plugins → yy4382's Utilities**.
 
-**Available Settings:**
-- **Clear recent directories** - Button to clear the list of recently used directories
+- **Daily note format**, **Monthly note format**, **Future log format**, **Spring semester format**, **Fall semester format** - Moment path formats (without `.md`) used to recognize journal notes. Invalid or ambiguous formats disable the Bullet Journal features.
+- **Clear recent directories** - Clear the list of recently used directories.
 
 ## Installation
 
